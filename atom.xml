@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://matteglin.com/"/>
-  <updated>2020-05-23T20:28:06.031Z</updated>
+  <updated>2020-06-07T15:09:23.362Z</updated>
   <id>http://matteglin.com/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>What to do if your Splunk server certificate expires</title>
+    <link href="http://matteglin.com/2020/06/07/What-to-do-if-your-Splunk-server-certificate-expires/"/>
+    <id>http://matteglin.com/2020/06/07/What-to-do-if-your-Splunk-server-certificate-expires/</id>
+    <published>2020-06-07T14:52:01.000Z</published>
+    <updated>2020-06-07T15:09:23.362Z</updated>
+    
+    <content type="html"><![CDATA[<p>Splunk will automatically generate an internal server certificate on first run. This certificate is used by default for SSL secured communication from splunkd over port 8089. It is also used as part of the mongdb initialisation on the KVStore.</p><p>This certificate is auto generated on first run, and has an expiry date <strong>two years</strong> into the future.</p><p>Now, under normal use this isn’t an issue, as upgrades to the Splunk platform will ensure to renew the certificate as required (another reason to keep things up to date)</p><p>In the event it expires (I’ve seen this happen multiple times due to environments sitting on the same version for two years) you will see very odd behaviour from Splunk. Most noticeably, the KVStore will refuse to start using the expired certificate. Now, it will happily continue to run under the expired certificate, so everything is peachy until the instance restarts, at which point mongodb will exit on start due to said expired cert…</p><p><strong>How do I fix this?</strong></p><p>Actually, it’s quite simple. To force Splunk to re-issue the certificate, simply move the current server.pem out of <em>$SPLUNK_HOME/etc/auth</em> and restart Splunk.</p><p>A new certificate will be generated to replace the missing one, with a new expiry date two years into the future.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Splunk will automatically generate an internal server certificate on first run. This certificate is used by default for SSL secured commu
+      
+    
+    </summary>
+    
+    
+    
+      <category term="splunk, ssl, certificates" scheme="http://matteglin.com/tags/splunk-ssl-certificates/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Splunk, Languages &amp; 24-Hour Time</title>
+    <link href="http://matteglin.com/2020/05/24/Splunk-Languages-24-Hour-Time/"/>
+    <id>http://matteglin.com/2020/05/24/Splunk-Languages-24-Hour-Time/</id>
+    <published>2020-05-24T14:45:26.000Z</published>
+    <updated>2020-06-07T15:11:56.162Z</updated>
+    
+    <content type="html"><![CDATA[<p>Splunk doesn’t make it straightforward to change the language the Splunk UI presents back to you. It tries to be overly helpful by being responsive to the language of your web browser. This is fine, but sometimes for testing, and for corporate machine build reasons, you might not want to see Splunk in the same language / region setting as your OS.</p><img src="/2020/05/24/Splunk-Languages-24-Hour-Time/no_lang.png" width="492" height="532" alt="Where is my language setting?" title="Where is my language setting?"><p>Your web browser is sending language information to Splunk as part of all requests within the <strong>Accept-Language</strong> field of the Header. For many of us using standard machine builds, this can end up being <strong>en-US</strong>, which is fine, unless like me you really don’t like timestamps displayed with AM / PM format (it’s a <em>tiny</em> niggle, I know…). I ensure that my browser sends an Accept-Language key of <strong>en-GB</strong> which will cause Splunk to display all time fields in <strong>24 hour time</strong>.<br>It just makes life simpler when dealing with time.</p><p>If you’re using a non-english language version of your OS, rest assured - this should ensure Splunk returns to you the language that you expect. This of course assumes that the language is supported.</p><p>You can also use various browser extensions to manipulate the Accept-Language header and use Splunk in an alternate language. Great for testing localisation needs.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Splunk doesn’t make it straightforward to change the language the Splunk UI presents back to you. It tries to be overly helpful by being 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="splunk, i18n, time" scheme="http://matteglin.com/tags/splunk-i18n-time/"/>
+    
+  </entry>
   
   <entry>
     <title>Time based DHCP Lookups using Splunk</title>

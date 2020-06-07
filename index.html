@@ -69,6 +69,95 @@
       <div class="outer">
         <section id="main">
   
+    <article id="landscape-What-to-do-if-your-Splunk-server-certificate-expires" class="article article-type-landscape" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/07/What-to-do-if-your-Splunk-server-certificate-expires/" class="article-date">
+  <time datetime="2020-06-07T14:52:01.000Z" itemprop="datePublished">2020-06-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/07/What-to-do-if-your-Splunk-server-certificate-expires/">What to do if your Splunk server certificate expires</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Splunk will automatically generate an internal server certificate on first run. This certificate is used by default for SSL secured communication from splunkd over port 8089. It is also used as part of the mongdb initialisation on the KVStore.</p>
+<p>This certificate is auto generated on first run, and has an expiry date <strong>two years</strong> into the future.</p>
+<p>Now, under normal use this isn’t an issue, as upgrades to the Splunk platform will ensure to renew the certificate as required (another reason to keep things up to date)</p>
+<p>In the event it expires (I’ve seen this happen multiple times due to environments sitting on the same version for two years) you will see very odd behaviour from Splunk. Most noticeably, the KVStore will refuse to start using the expired certificate. Now, it will happily continue to run under the expired certificate, so everything is peachy until the instance restarts, at which point mongodb will exit on start due to said expired cert…</p>
+<p><strong>How do I fix this?</strong></p>
+<p>Actually, it’s quite simple. To force Splunk to re-issue the certificate, simply move the current server.pem out of <em>$SPLUNK_HOME/etc/auth</em> and restart Splunk.</p>
+<p>A new certificate will be generated to replace the missing one, with a new expiry date two years into the future.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://matteglin.com/2020/06/07/What-to-do-if-your-Splunk-server-certificate-expires/" data-id="ckb5768pc0000mpme3qvpcixs" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/splunk-ssl-certificates/" rel="tag">splunk, ssl, certificates</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="landscape-Splunk-Languages-24-Hour-Time" class="article article-type-landscape" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/24/Splunk-Languages-24-Hour-Time/" class="article-date">
+  <time datetime="2020-05-24T14:45:26.000Z" itemprop="datePublished">2020-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/24/Splunk-Languages-24-Hour-Time/">Splunk, Languages &amp; 24-Hour Time</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Splunk doesn’t make it straightforward to change the language the Splunk UI presents back to you. It tries to be overly helpful by being responsive to the language of your web browser. This is fine, but sometimes for testing, and for corporate machine build reasons, you might not want to see Splunk in the same language / region setting as your OS.</p>
+<img src="/2020/05/24/Splunk-Languages-24-Hour-Time/no_lang.png" width="492" height="532" alt="Where is my language setting?" title="Where is my language setting?">
+
+<p>Your web browser is sending language information to Splunk as part of all requests within the <strong>Accept-Language</strong> field of the Header. For many of us using standard machine builds, this can end up being <strong>en-US</strong>, which is fine, unless like me you really don’t like timestamps displayed with AM / PM format (it’s a <em>tiny</em> niggle, I know…). I ensure that my browser sends an Accept-Language key of <strong>en-GB</strong> which will cause Splunk to display all time fields in <strong>24 hour time</strong>.<br>It just makes life simpler when dealing with time.</p>
+<p>If you’re using a non-english language version of your OS, rest assured - this should ensure Splunk returns to you the language that you expect. This of course assumes that the language is supported.</p>
+<p>You can also use various browser extensions to manipulate the Accept-Language header and use Splunk in an alternate language. Great for testing localisation needs.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://matteglin.com/2020/05/24/Splunk-Languages-24-Hour-Time/" data-id="ckalasrp20001kwmefnzo4qbx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/splunk-i18n-time/" rel="tag">splunk, i18n, time</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="landscape-Time-based-DHCP-Lookups-using-Splunk" class="article article-type-landscape" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/05/23/Time-based-DHCP-Lookups-using-Splunk/" class="article-date">
@@ -125,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://matteglin.com/2020/05/23/Time-based-DHCP-Lookups-using-Splunk/" data-id="ckak2rx8u00011gmefisl8e0c" class="article-share-link">Share</a>
+      <a data-url="http://matteglin.com/2020/05/23/Time-based-DHCP-Lookups-using-Splunk/" data-id="ckalasrp50002kwme6cdjar9j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/splunk-splunk-es-lookups/" rel="tag">splunk, splunk-es, lookups</a></li></ul>
@@ -164,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://matteglin.com/2020/05/23/Hello-World/" data-id="ckak2rx8n00001gmegezs5b26" class="article-share-link">Share</a>
+      <a data-url="http://matteglin.com/2020/05/23/Hello-World/" data-id="ckalasrow0000kwmefmqt1mjf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -187,7 +276,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/splunk-splunk-es-lookups/" rel="tag">splunk, splunk-es, lookups</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/splunk-i18n-time/" rel="tag">splunk, i18n, time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/splunk-splunk-es-lookups/" rel="tag">splunk, splunk-es, lookups</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/splunk-ssl-certificates/" rel="tag">splunk, ssl, certificates</a></li></ul>
     </div>
   </div>
 
@@ -197,7 +286,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/splunk-splunk-es-lookups/" style="font-size: 10px;">splunk, splunk-es, lookups</a>
+      <a href="/tags/splunk-i18n-time/" style="font-size: 10px;">splunk, i18n, time</a> <a href="/tags/splunk-splunk-es-lookups/" style="font-size: 10px;">splunk, splunk-es, lookups</a> <a href="/tags/splunk-ssl-certificates/" style="font-size: 10px;">splunk, ssl, certificates</a>
     </div>
   </div>
 
@@ -206,7 +295,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
     </div>
   </div>
 
@@ -217,6 +306,14 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/06/07/What-to-do-if-your-Splunk-server-certificate-expires/">What to do if your Splunk server certificate expires</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/Splunk-Languages-24-Hour-Time/">Splunk, Languages &amp; 24-Hour Time</a>
+          </li>
         
           <li>
             <a href="/2020/05/23/Time-based-DHCP-Lookups-using-Splunk/">Time based DHCP Lookups using Splunk</a>

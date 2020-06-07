@@ -5,15 +5,22 @@
   
 
   
-  <title>Tag: splunk, splunk-es, lookups | M-Space</title>
+  <title>Splunk, Languages &amp; 24-Hour Time | M-Space</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="M-Space">
-<meta property="og:url" content="http://matteglin.com/tags/splunk-splunk-es-lookups/">
+  <meta name="description" content="Splunk doesn’t make it straightforward to change the language the Splunk UI presents back to you. It tries to be overly helpful by being responsive to the language of your web browser. This is fine, b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Splunk, Languages &amp; 24-Hour Time">
+<meta property="og:url" content="http://matteglin.com/2020/05/24/Splunk-Languages-24-Hour-Time/">
 <meta property="og:site_name" content="M-Space">
+<meta property="og:description" content="Splunk doesn’t make it straightforward to change the language the Splunk UI presents back to you. It tries to be overly helpful by being responsive to the language of your web browser. This is fine, b">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://matteglin.com/2020/05/24/Splunk-Languages-24-Hour-Time/no_lang.png">
+<meta property="article:published_time" content="2020-05-24T14:45:26.000Z">
+<meta property="article:modified_time" content="2020-06-07T15:11:56.162Z">
 <meta property="article:author" content="matt">
+<meta property="article:tag" content="splunk, i18n, time">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://matteglin.com/2020/05/24/Splunk-Languages-24-Hour-Time/no_lang.png">
 <meta name="twitter:creator" content="@matteglin">
   
     <link rel="alternate" href="/atom.xml" title="M-Space" type="application/atom+xml">
@@ -67,40 +74,68 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-landscape">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/05/23/Time-based-DHCP-Lookups-using-Splunk/" class="archive-article-date">
-  <time datetime="2020-05-23T18:46:00.000Z" itemprop="datePublished">May 23</time>
+        <section id="main"><article id="landscape-Splunk-Languages-24-Hour-Time" class="article article-type-landscape" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/24/Splunk-Languages-24-Hour-Time/" class="article-date">
+  <time datetime="2020-05-24T14:45:26.000Z" itemprop="datePublished">2020-05-24</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/23/Time-based-DHCP-Lookups-using-Splunk/">Time based DHCP Lookups using Splunk</a>
+    <h1 class="article-title" itemprop="name">
+      Splunk, Languages &amp; 24-Hour Time
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Splunk doesn’t make it straightforward to change the language the Splunk UI presents back to you. It tries to be overly helpful by being responsive to the language of your web browser. This is fine, but sometimes for testing, and for corporate machine build reasons, you might not want to see Splunk in the same language / region setting as your OS.</p>
+<img src="/2020/05/24/Splunk-Languages-24-Hour-Time/no_lang.png" width="492" height="532" alt="Where is my language setting?" title="Where is my language setting?">
 
+<p>Your web browser is sending language information to Splunk as part of all requests within the <strong>Accept-Language</strong> field of the Header. For many of us using standard machine builds, this can end up being <strong>en-US</strong>, which is fine, unless like me you really don’t like timestamps displayed with AM / PM format (it’s a <em>tiny</em> niggle, I know…). I ensure that my browser sends an Accept-Language key of <strong>en-GB</strong> which will cause Splunk to display all time fields in <strong>24 hour time</strong>.<br>It just makes life simpler when dealing with time.</p>
+<p>If you’re using a non-english language version of your OS, rest assured - this should ensure Splunk returns to you the language that you expect. This of course assumes that the language is supported.</p>
+<p>You can also use various browser extensions to manipulate the Accept-Language header and use Splunk in an alternate language. Great for testing localisation needs.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://matteglin.com/2020/05/24/Splunk-Languages-24-Hour-Time/" data-id="ckalasrp20001kwmefnzo4qbx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/splunk-i18n-time/" rel="tag">splunk, i18n, time</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/06/07/What-to-do-if-your-Splunk-server-certificate-expires/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          What to do if your Splunk server certificate expires
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/23/Time-based-DHCP-Lookups-using-Splunk/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Time based DHCP Lookups using Splunk</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
